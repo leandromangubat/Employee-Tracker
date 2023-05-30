@@ -1,8 +1,25 @@
 {
-    "name": "employee-tracker-app",
-    "version": "1.0.0",
-    "dependencies": {
-      "express": "^4.17.1",
-      "axios": "^0.21.1"
-    }
+  "name": "employee-tracker-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandromangubat/Employee-Tracker.git"
+  },
+  "author": "Leandro Mangubat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leandromangubat/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/leandromangubat/Employee-Tracker#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.3.3"
   }
+}

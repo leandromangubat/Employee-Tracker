@@ -14,12 +14,12 @@ VALUES ("Web Developer", 80000, 1002),
        ("Finance Manager", 95000, 1004),
        ("Engineering Manager", 100000, 1002);
 
-INSERT INTO employees(first_name, last_name, role_id, manager_id)
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES ("Marcus", "Aurelius", 1, NULL),  
-       ("Mark", "Antony", 7, NULL),       
+       ("Marc", "Antony", 7, NULL),       
        ("Julius", "Caesar", 6, NULL),
-       ("Cleopatra", "Ptolemy", 5, NULL),
-       ("Octavian", "Augustus", 3, 2),
+       ("Octavian", "Augustus", 5, NULL),
+       ("Cleopatra", "Ptolemy", 3, 2),
        ("Pompeius", "Magnus", 3, 2),
        ("Marcus", "Crassus", 1, 4),
        ("Lucius", "Seneca", 1, 4),
