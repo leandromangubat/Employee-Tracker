@@ -47,7 +47,7 @@ class DB {
     }
     updateRole(updateInfo){
         return this.connection.query(
-            "UPDATE employee SET role_id = (?) WHERE first_name = ? AND last_name = ?;",
+            "UPDATE employee SET role_id = (SELECT id FROM role WHERE title = ?) WHERE first_name = ? AND last_name = ?;",
             updateInfo, (err, res) => {
                 if(err){
                     throw err;

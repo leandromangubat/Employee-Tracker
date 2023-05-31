@@ -135,6 +135,7 @@ const newEmpQs = [
     }
 ]
 
+
 init();
 
 async function viewEmployees(){
@@ -172,6 +173,7 @@ async function addEmployee(employeeInfo){
 
 async function updateEmployee(){
     let empArr = await listEmployees();
+    let roleArr = await listRoles();
 
     inquirer.prompt([
         {
@@ -181,22 +183,10 @@ async function updateEmployee(){
             choices: empArr
         },
         {
-            type: "list",
+        type: "list",
         message: "Please select employee's role id",
         name: "role",
-        choices: [
-            "1.) Web Developer",
-            "2.) Sales Associate",
-            "3.) Accountant",
-            "4.) Customer Liason",
-            "5.) Engineer",
-            "6.) Sales Supervisor",
-            "7.) Finance Manager",
-            "8.) Engineering Manager",
-        ],
-        filter: function(value) {
-            return value.split(".")[0].trim();
-        }
+        choices: roleArr
         }
     ]).then((answer) => {
         let empName = answer.employee.split(" ");
@@ -258,13 +248,13 @@ async function deleteRole(){
 }
 
 async function listEmployees(){
-    let employeeArr = [];
+    let empArr = [];
     let employees = await db.employeeNames();
     Object.keys(employees).forEach(function (key){
         let row = employees[key];
-        employeeArr.push(row.employee_name);
+        empArr.push(row.employee_name);
     });
-    return employeeArr;
+    return empArr;
 }
 
 async function listDept(){
