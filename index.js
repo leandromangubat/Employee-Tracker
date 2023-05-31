@@ -16,15 +16,9 @@ menu = () => {
         } else if(answers.menu == "View all employees"){
             viewEmployees();
         } else if(answers.menu == "Add a department"){
-            inquirer.prompt({
-                type: "input",
-                message: "Please type in the department you would like to add.",
-                name: "dept"
-            }).then((answer) => {
-                addDepartment(answer.dept);
-            });
+            deptDetails();
         } else if(answers.menu == "Add a role"){
-            roleDetails()
+            roleDetails();
         } else if(answers.menu == "Add an employee"){
             empDetails();
         } else if(answers.menu == "Update employee role"){
@@ -126,6 +120,15 @@ async function roleDetails(){
     ]).then((answer) => {
         let roleInfo = [answer.role, answer.salary, answer.dept];
         addRole(roleInfo);
+    });
+}
+async function deptDetails(){
+    inquirer.prompt({
+        type: "input",
+        message: "Please type in the department you would like to add.",
+        name: "dept"
+    }).then((answer) => {
+        addDepartment(answer.dept);
     });
 }
 
