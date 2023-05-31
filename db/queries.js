@@ -34,7 +34,7 @@ class DB {
     }
     addNewRole(roleInfo){
         return this.connection.query(
-            "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+            "INSERT INTO role (title, salary, department_id) VALUES (?, ?, (SELECT id FROM department WHERE name = ? ));",
             roleInfo, (err, res) => {
                 if(err){
                     console.log(err);

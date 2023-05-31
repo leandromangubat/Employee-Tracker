@@ -24,10 +24,7 @@ menu = () => {
                 addDepartment(answer.dept);
             });
         } else if(answers.menu == "Add a role"){
-            inquirer.prompt(roleQs).then((answer) => {
-                let roleInfo = [answer.role, answer.salary, answer.dept];
-                addRole(roleInfo);
-            });
+            roleDetails()
         } else if(answers.menu == "Add an employee"){
             empDetails();
         } else if(answers.menu == "Update employee role"){
@@ -64,24 +61,6 @@ const menuQs = [{
         "Exit"
     ]
 }];
-const roleQs = [
-    {
-        type: "input",
-        message: "Please type in the role you would like to add.",
-        name: "role"
-    },
-    {
-        type: "input",
-        message: "Please type in the salary for this role.",
-        name: "salary"
-    },
-    {
-        type: "input",
-        message: "Please type in a department id for this role",
-        name: "dept",
-        default: "1001"
-    }
-]
 async function empDetails (){
 let roleArr = await listRoles();
 inquirer.prompt([
@@ -124,6 +103,30 @@ inquirer.prompt([
     ];
     addEmployee(employeeInfo);
 });
+}
+async function roleDetails(){
+    let deptArr = await listDept();
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "Please type in the role you would like to add.",
+            name: "role"
+        },
+        {
+            type: "input",
+            message: "Please type in the salary for this role.",
+            name: "salary"
+        },
+        {
+            type: "list",
+            message: "Please type in a department id for this role",
+            name: "dept",
+            choices: deptArr
+        }
+    ]).then((answer) => {
+        let roleInfo = [answer.role, answer.salary, answer.dept];
+        addRole(roleInfo);
+    });
 }
 
 
