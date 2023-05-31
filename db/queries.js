@@ -60,7 +60,7 @@ class DB {
     }
     addNewEmployee(employeeInfo){
         return this.connection.query(
-            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, (SELECT id FROM role WHERE title = ?), ?)",
             employeeInfo, (err, res) => {
                 if(err){
                     console.log(err);

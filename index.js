@@ -29,15 +29,7 @@ menu = () => {
                 addRole(roleInfo);
             });
         } else if(answers.menu == "Add an employee"){
-            inquirer.prompt(newEmpQs).then((answer) => {
-                let employeeInfo = [
-                    answer.firstName,
-                    answer.lastName,
-                    answer.role,
-                    answer.manager
-                ];
-                addEmployee(employeeInfo);
-            });
+            empDetails();
         } else if(answers.menu == "Update employee role"){
             updateEmployee();
         } else if(answers.menu == "Delete an employee"){
@@ -90,7 +82,9 @@ const roleQs = [
         default: "1001"
     }
 ]
-const newEmpQs = [
+async function empDetails (){
+let roleArr = await listRoles();
+inquirer.prompt([
     {
         type: "input",
         message: "Please type in the employee's first name.",
@@ -105,19 +99,7 @@ const newEmpQs = [
         type: "list",
         message: "Please select employee's role id",
         name: "role",
-        choices: [
-            "1.) Web Developer",
-            "2.) Sales Associate",
-            "3.) Accountant",
-            "4.) Customer Liason",
-            "5.) Engineer",
-            "6.) Sales Supervisor",
-            "7.) Finance Manager",
-            "8.) Engineering Manager",
-        ],
-        filter: function(value) {
-            return value.split(".")[0].trim();
-        }
+        choices: roleArr
     },
     {
         type: "list",
@@ -133,7 +115,17 @@ const newEmpQs = [
             return value.split(".")[0].trim();
         },
     }
-]
+]).then((answer) => {
+    let employeeInfo = [
+        answer.firstName,
+        answer.lastName,
+        answer.role,
+        answer.manager
+    ];
+    addEmployee(employeeInfo);
+});
+}
+
 
 
 init();
@@ -158,17 +150,14 @@ async function viewRoles(){
 
 async function addDepartment(newDept){
     await db.addNewDepartment(newDept);
-    viewDepartments();
 }
 
 async function addRole(newRole, salary, deptId) {
     await db.addNewRole(newRole, salary, deptId);
-    viewRoles();
-  }
+}
 
 async function addEmployee(employeeInfo){
     await db.addNewEmployee(employeeInfo);
-    viewEmployees();
 }
 
 async function updateEmployee(){
@@ -184,7 +173,7 @@ async function updateEmployee(){
         },
         {
         type: "list",
-        message: "Please select employee's role id",
+        message: "Please select employee role",
         name: "role",
         choices: roleArr
         }
