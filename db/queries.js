@@ -78,7 +78,7 @@ class DB {
     }
     departmentNames(){
         return this.connection.query(
-            "`SELECT department.name AS departments FROM department;`"
+            "SELECT department.name AS departments FROM department;"
         );
     }
     roleNames(){
